@@ -1,18 +1,21 @@
-import { useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
+import PropTypes from "prop-types";
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (user === null) {
-      navigate("/signin", { replace: true });
-    }
-  }, [user, navigate]);
+  if (user === null) {
+    console.log("ProtectedRoute: Redirecting to /signin");
+    return <Navigate to="/signin" replace />;
+  }
 
   return children;
 }
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default ProtectedRoute;
