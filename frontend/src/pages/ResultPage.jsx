@@ -49,7 +49,7 @@ function ResultPage() {
               </h1>
             </div>
           </div>
-          <div className="w-full">
+          <div className="mt-6 w-full">
             <p className="block text-sm font-medium">Score</p>
             <h1 className="mt-2 block text-2xl font-semibold text-blue-600">
               {data.score}
