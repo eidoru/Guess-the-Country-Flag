@@ -14,7 +14,9 @@ import { continents } from "../data/continents";
 
 function HomePage() {
   const [selectedContinent, setSelectedContinent] = useState(continents[0]);
+
   const { user, setUser } = useAuth();
+
   const navigate = useNavigate();
 
   return (

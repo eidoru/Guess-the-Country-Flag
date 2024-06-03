@@ -5,13 +5,16 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
+import { backend } from "../config";
+
 function SignInPage() {
   const { register, handleSubmit } = useForm();
   const { setUser } = useAuth();
+
   const navigate = useNavigate();
 
   function onSubmit(data) {
-    axios.post("http://localhost:8080/api/signin", data).then((response) => {
+    axios.post(`${backend}/api/signin`, data).then((response) => {
       console.log(response.data);
       if (response.data.status) {
         setUser(response.data.object);

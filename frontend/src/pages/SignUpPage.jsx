@@ -4,12 +4,15 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import { backend } from "../config";
+
 function SignUpPage() {
   const { register, handleSubmit } = useForm();
+
   const navigate = useNavigate();
 
   function onSubmit(data) {
-    axios.post("http://localhost:8080/api/signup", data).then((response) => {
+    axios.post(`${backend}/api/signup`, data).then((response) => {
       if (response.data.status) {
         navigate("/signin", { replace: true });
       }
