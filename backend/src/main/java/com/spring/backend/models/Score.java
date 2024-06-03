@@ -21,21 +21,21 @@ public class Score {
     private String continent;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "username")
+    @JoinColumn(name = "user", referencedColumnName = "username")
     private User user;
 
     @Column(name="accuracy")
-    private String accuracy;
+    private Float accuracy;
 
     @Column(name="time")
-    private Float time;
+    private Integer time;
 
     @Column(name="score")
-    private Float score;
+    private Integer score;
 
     public Score() {}
 
-    public Score(String continent, User user, String accuracy, Float time, Float score) {
+    public Score(String continent, User user, Float accuracy, Integer time, Integer score) {
         this.continent = continent;
         this.user = user;
         this.accuracy = accuracy;
@@ -51,7 +51,7 @@ public class Score {
         return continent;
     }
 
-    public Float getScore() {
+    public Integer getScore() {
         return score;
     }
 
@@ -59,11 +59,11 @@ public class Score {
         return user;
     }
 
-    public String getAccuracy() {
+    public Float getAccuracy() {
         return accuracy;
     }
 
-    public Float getTime() {
+    public Integer getTime() {
         return time;
     }
 
@@ -75,19 +75,19 @@ public class Score {
         this.continent = continent;
     }
 
-    public void setScore(Float score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
-    public void setUsername(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public void setAccuracy(String accuracy) {
+    public void setAccuracy(Float accuracy) {
         this.accuracy = accuracy;
     }
 
-    public void setTime(Float time) {
+    public void setTime(Integer time) {
         this.time = time;
     }
 }
