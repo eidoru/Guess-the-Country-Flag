@@ -13,7 +13,7 @@ public class ScoreService {
     private ScoreRepository scoreRepository;
 
     public Response<Score> getScores(String continent) {
-        return new Response<Score>(true, scoreRepository.findAllByContinent(continent));
+        return new Response<Score>(true, scoreRepository.findTop10ByContinentOrderByScoreDesc(continent));
     }
 
     public Response<Score> setScore(Score score) {
