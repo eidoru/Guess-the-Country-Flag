@@ -7,6 +7,8 @@ import { useAuth } from "../hooks/useAuth";
 
 import Stopwatch from "../components/Stopwatch";
 
+import { backend } from "../config";
+
 function shuffle(array) {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
@@ -66,11 +68,9 @@ function GamePage() {
           accuracy: accuracy,
         };
         console.log(formData);
-        axios
-          .post("http://localhost:8080/api/scores", formData)
-          .then((response) => {
-            console.log(response.data);
-          });
+        axios.post(`${backend}/api/scores`, formData).then((response) => {
+          console.log(response.data);
+        });
       }
       navigate("/game/results", {
         state: {
