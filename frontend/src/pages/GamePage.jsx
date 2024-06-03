@@ -1,5 +1,9 @@
+import axios from "axios";
+
 import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../hooks/useAuth";
 
 import Stopwatch from "../components/Stopwatch";
 
@@ -24,6 +28,8 @@ function GamePage() {
   const [currentCountry, setCurrentCountry] = useState(null);
   const [correctClicks, setCorrectClicks] = useState(0);
   const [totalClicks, setTotalClicks] = useState(0);
+
+  const { user } = useAuth();
 
   const timeRef = useRef(0);
 
@@ -51,6 +57,21 @@ function GamePage() {
   function handleClick(country) {
     if (countries.length <= 1) {
       setCurrentCountry(null);
+      if (user) {
+        const formData = {
+          user: user,
+          continent: continent.name,
+          score: calculateScore(accuracy / 100, timeRef.current),
+          time: timeRef.current,
+          accuracy: accuracy,
+        };
+        console.log(formData);
+        axios
+          .post("http://localhost:8080/api/scores", formData)
+          .then((response) => {
+            console.log(response.data);
+          });
+      }
       navigate("/game/results", {
         state: {
           data: {
